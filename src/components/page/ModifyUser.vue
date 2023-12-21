@@ -112,10 +112,13 @@
         methods:{
         	getUserData() {
 				const self = this;	
-				let username = sessionStorage.getItem('ms_user').name;			
+				let username =JSON.parse(sessionStorage.getItem('ms_user')).name;			
 				self.$http.get('/api/user/getUser',{name: username}).then(function(response) {
 					console.log(response);
-					let result = response.data[0];
+					const targetPhone = username
+                    const result = response.data.find(u => u.account === targetPhone);
+					console.log(result,"result",response.data,username);
+					// let result = response.data[0];
 					self.form.name = result.username;
 					self.form.account = result.account;
 					self.form.email = result.email;

@@ -3,6 +3,9 @@ import App from './App';
 import router from './router';
 import axios from 'axios';
 import ElementUI from 'element-ui';
+//引入Message组件并注册到全局
+import { Message } from 'element-ui';
+Vue.prototype.$message = Message;
 import 'element-ui/lib/theme-default/index.css';    // 默认主题
 // import '../static/css/theme-green/index.css';       // 浅绿色主题
 import SIdentify from './components/page/Identify';    //自定义组件

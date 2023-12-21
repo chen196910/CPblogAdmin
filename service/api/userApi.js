@@ -44,11 +44,12 @@ router.post('/login', (req, res) => {
     // var sql_password = $sql.user.select_password;
     var params = req.body;
     console.log(params);
-    if (params.name) {
-        sql_name += "where username ='"+ params.name +"'";
-    }
+   
     var keywords = JSON.parse(Object.keys(params)[0]);
-    conn.query(sql_name, params.name, function(err, result) {
+    if (keywords.name) {
+        sql_name += " where account = '" + keywords.name + "'";
+    }
+    conn.query(sql_name, keywords.name, function(err, result) {
         if (err) {
             console.log(err);
         }
@@ -68,6 +69,7 @@ router.post('/login', (req, res) => {
     })
 });
 
+
 //获取用户信息
 router.get('/getUser', (req, res) => {
     var sql_name = $sql.user.select_name;
@@ -75,7 +77,7 @@ router.get('/getUser', (req, res) => {
     var params = req.body;
     console.log(params);
     if (params.name) {
-        sql_name += "where username ='"+ params.name +"'";
+        sql_name += "where account ='"+ params.name +"'";
     }
     conn.query(sql_name, params.name, function(err, result) {
         if (err) {
